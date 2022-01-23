@@ -1,0 +1,58 @@
+@import "../../styles/_variables";
+
+.section {
+  margin-top: 70px;
+  padding-top: 40px;
+  // height: 600px;
+  clip-path: polygon(0 10%, 100% 0%, 100% 90%, 0 100%);
+  background-image: url("/img/formations.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+
+  h2 {
+    color: $secondary-color;
+    font-size: 35px;
+    letter-spacing: 3px;
+    // margin-bottom: 50px;
+  }
+
+  p {
+    color: #fff;
+    text-align: center;
+    // border-bottom: 1px solid $secondary-color;
+  }
+
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    opacity: 0;
+
+    .element {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 30%;
+      margin-bottom: 20px;
+
+      p {
+        font-size: 22px;
+        color: $secondary-color;
+      }
+
+      .icon {
+        color: $primary-color;
+        font-size: 60px;
+      }
+    }
+  }
+}

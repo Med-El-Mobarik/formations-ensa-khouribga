@@ -1,0 +1,117 @@
+@import "../../styles/_variables";
+
+.navcontainer {
+  width: 100%;
+  // position: fixed;
+  z-index: 999;
+  // background-color: rgba(0, 0, 0, 0.8);
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 10px;
+    position: relative;
+    z-index: 11;
+
+    img {
+      width: 130px;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      color: #fff;
+      font-size: 22px;
+      li {
+        margin-left: 50px;
+        cursor: pointer;
+        // border-bottom: 1px $secondary-color solid;
+        border-bottom: 1px transparent solid;
+        // border-radius: 50%;
+        padding-bottom: 10px;
+        transition: 0.2s;
+
+        &:hover {
+          border: 0;
+          color: $secondary-color;
+          border-bottom: 1px $secondary-color solid;
+        }
+      }
+    }
+  }
+}
+
+.header {
+  height: 100vh;
+  // background-image: linear-gradient(
+  //     to bottom,
+  //     rgba(0, 0, 0, 0.8) 50%,
+  //     rgba(52, 152, 219, 0.8)
+  //   ),
+  //   url("/img/graduation.jpg");
+  background-image: url("/img/graduation.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  clip-path: polygon(0 0, 100% 0%, 100% 90%, 0 100%);
+  position: relative;
+
+  .content {
+    // width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 150px;
+
+    div {
+      display: flex;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 50px;
+      // letter-spacing: px;
+      line-height: 1.8em;
+      font-weight: 300;
+    }
+
+    .btn {
+      font-size: 20px;
+      border: 0;
+      border-radius: 40px;
+      width: 200px;
+      padding: 15px 10px;
+      font-weight: 100;
+      cursor: pointer;
+      margin-right: 20px;
+      transition: 0.2s;
+    }
+    .full {
+      background-color: $secondary-color;
+      color: #fff;
+
+      &:hover {
+        background-color: $secondary-color-2;
+      }
+    }
+    .empty {
+      background-color: transparent;
+      color: $secondary-color;
+      border: 2px solid $secondary-color;
+
+      &:hover {
+        background-color: $secondary-color-2;
+        border: 0;
+        color: white;
+        border: 2px solid transparent;
+      }
+    }
+  }
+}
