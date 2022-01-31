@@ -29,14 +29,17 @@ const Admission = () => {
   return (
     <>
       <NavigationBar />
-      <div className={`${classes.content} animate__animated animate__fadeIn`}>
+      <div className={`${classes.content} animate__animated animate__fadeInUp`}>
         <h2> Admission</h2>
         <hr />
         <div className={classes.container}>
           {steps.map((step, id) => (
             <div key={id} className={classes.stepContainer}>
               <div className={classes.step}>
-                <img src={`img/admission/admission_${step.id}.png`} alt={step.title} />
+                <img
+                  src={`img/admission/admission_${step.id}.png`}
+                  alt={step.title}
+                />
                 <div className={classes.rightContent}>
                   <h3>{step.title}</h3>
                   <p>{step.text}</p>
