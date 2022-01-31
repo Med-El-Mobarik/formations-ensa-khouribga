@@ -5,7 +5,7 @@ import axios from "axios";
 // });
 
 const instance = axios.create({
-  baseURL: "https://ensakh-formations.vercel.app/",
+  baseURL: "https://ensakh-formations.vercel.app/api/",
 });
 
 export default instance;
