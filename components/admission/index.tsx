@@ -29,7 +29,7 @@ const Admission = () => {
   return (
     <>
       <NavigationBar />
-      <div className={`${classes.content} animate__animated animate__fadeInUp`}>
+      <div className={classes.content}>
         <h2> Admission</h2>
         <hr />
         <div className={classes.container}>
@@ -49,6 +49,7 @@ const Admission = () => {
             </div>
           ))}
         </div>
+        <button className={classes.btn}>S&apos;inscrire Maintenant !</button>
       </div>
       <Footer />
     </>
