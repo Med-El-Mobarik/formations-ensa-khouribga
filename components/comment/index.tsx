@@ -26,9 +26,7 @@ const index = () => {
           </div>
         </div>
       </div>
-      <button className="animate__animated animate__pulse animate__infinite">
-        S&apos;inscrire
-      </button>
+      <button>S&apos;inscrire</button>
     </section>
   );
 };

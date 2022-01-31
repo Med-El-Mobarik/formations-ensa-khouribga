@@ -1,0 +1,117 @@
+@import "../../styles/_variables";
+
+.content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+
+  h2 {
+    text-align: center;
+    color: $secondary-color;
+    font-size: 35px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  hr {
+    width: 80px;
+    height: 5px;
+    border-radius: 50px;
+    background-color: $secondary-color;
+    border: 0;
+    margin-bottom: 70px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .stepContainer {
+      &::after {
+        background-color: $primary-color-2;
+        content: "";
+        position: absolute;
+        left: calc(50% - 2px);
+        width: 4px;
+        height: 100%;
+        top: 0;
+      }
+
+      &:nth-child(even) {
+        align-self: flex-end;
+
+        & > .step {
+          margin-left: 30px;
+
+          &::after {
+            left: -15px;
+          }
+
+          .circle{
+            left: -40px;
+          }
+        }
+      }
+
+      width: 50%;
+      display: flex;
+    }
+
+    .step {
+      &::after {
+        content: "";
+        background-color: #fafafa;
+        // background-color: red;
+        position: absolute;
+        transform: rotate(45deg);
+        width: 30px;
+        height: 30px;
+        right: -15px;
+      }
+
+      .circle{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #fafafa;
+        border: 3px solid $primary-color-2;
+        right: -40px;
+        border-radius: 50%;
+        z-index: 100;
+      }
+
+      display: flex;
+      align-items: center;
+      background-color: #fafafa;
+      padding: 20px;
+      width: 75%;
+      align-self: flex-end;
+      margin-left: auto;
+      margin-right: 30px;
+      border-radius: 10px;
+      position: relative;
+
+      .rightContent {
+        display: flex;
+        flex-direction: column;
+      }
+
+      img {
+        width: 160px;
+        margin-right: 20px;
+      }
+      h3 {
+        color: $secondary-color;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      p {
+        color: #808080;
+        font-size: 18px;
+      }
+    }
+  }
+}

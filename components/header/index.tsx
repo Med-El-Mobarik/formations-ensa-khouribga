@@ -1,6 +1,6 @@
 import classes from "./index.module.scss";
+import Link from "next/link";
 import "animate.css";
-
 
 const index = () => {
   return (
@@ -8,11 +8,19 @@ const index = () => {
       <header className={classes.header}>
         <div className={classes.navcontainer}>
           <nav className="animate__animated animate__fadeInDown">
-            <img src="img/ensakh.png" alt="ensa-logo"></img>
+            <Link href="/">
+              <img src="img/ensakh.png" alt="ensa-logo"></img>
+            </Link>
             <ul>
-              <li>Accueil</li>
-              <li>Formations</li>
-              <li>Admission</li>
+              <Link href="/">
+                <li>Accueil</li>
+              </Link>
+              <Link href="/formations">
+                <li>Formations</li>
+              </Link>
+              <Link href="/admission">
+                <li>Admission</li>
+              </Link>
               <li>Inscription</li>
               <li>Contact</li>
             </ul>

@@ -1,0 +1,42 @@
+@import "../../styles/_variables";
+
+.navcontainer {
+  width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), $primary-color-2);
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    // padding-top: 10px;
+    position: relative;
+    z-index: 11;
+
+    img {
+      width: 100px;
+      cursor: pointer;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      color: #fff;
+      font-size: 18px;
+      li {
+        margin-left: 50px;
+        cursor: pointer;
+        border-bottom: 1px transparent solid;
+        padding-bottom: 10px;
+        transition: 0.2s;
+
+        &:hover {
+          border: 0;
+          color: $secondary-color;
+          border-bottom: 1px $secondary-color solid;
+        }
+      }
+    }
+  }
+}
