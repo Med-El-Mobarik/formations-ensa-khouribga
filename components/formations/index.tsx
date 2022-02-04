@@ -10,31 +10,27 @@ import Footer from "../footer/index";
 const Index = (props: PolesFormations) => {
   const { poles, formations } = props;
 
-  const licensePoles = poles.filter((pole) => pole.type !== "master");
-  const masterPoles = poles.filter((pole) => pole.type !== "license");
+  const licencePoles = poles.filter((pole) => pole.type !== "master");
+  const masterPoles = poles.filter((pole) => pole.type !== "licence");
 
   const licFormations = formations.filter(
-    (formation) => formation.type === "license"
+    (formation) => formation.type === "licence"
   );
   const masFormations = formations.filter(
     (formation) => formation.type === "master"
   );
-  // console.log(licensePoles);
-  // console.log(masterPoles);
-  // console.log(licFormations);
-  // console.log(masFormations);
 
-  const [licensePole, setLicensePole] = useState(0);
-  const [licenseFormations, setLicenseFormations] = useState(licFormations);
+  const [licencePole, setlicencePole] = useState(0);
+  const [licenceFormations, setlicenceFormations] = useState(licFormations);
   const [masterPole, setMasterPole] = useState(0);
   const [masterFormations, setMasterFormations] = useState(masFormations);
 
-  const changeLicensePole = (id: number) => {
-    setLicensePole(id);
+  const changelicencePole = (id: number) => {
+    setlicencePole(id);
     if (id === 0) {
-      setLicenseFormations(licFormations);
+      setlicenceFormations(licFormations);
     } else {
-      setLicenseFormations(
+      setlicenceFormations(
         formations.filter((formation) => formation.pole === id)
       );
     }
@@ -57,13 +53,13 @@ const Index = (props: PolesFormations) => {
         <h2>Licence professionnel de l&apos;université</h2>
         <hr />
         <div className={classes.buttons}>
-          {licensePoles.map((button) => (
+          {licencePoles.map((button) => (
             <button
               className={`${classes.btn} ${
-                licensePole === button.id ? classes.full : classes.empty
+                licencePole === button.id ? classes.full : classes.empty
               }`}
               key={button.id}
-              onClick={() => changeLicensePole(button.id)}
+              onClick={() => changelicencePole(button.id)}
             >
               {button.name}
             </button>
@@ -73,17 +69,19 @@ const Index = (props: PolesFormations) => {
           // className={`${classes.formations} animate__animated animate__fadeIn`}
           className={classes.formations}
         >
-          {licenseFormations.map((formation) => (
-            <div key={formation.id} className={classes.formation}>
-              <img
-                src={`/img/formations/formation_${formation.id}.png`}
-                alt={formation.name}
-              />
-              <h3>{formation.name}</h3>
-              <Link href="#">
-                <button>Plus D&apos;infos &rarr;</button>
-              </Link>
-            </div>
+          {licenceFormations.map((formation) => (
+            <Link key={formation.id} href={`/formation?id=${formation.id}`}>
+              <div className={classes.formation}>
+                <img
+                  src={`/img/formations/formation_${formation.id}.png`}
+                  alt={formation.name}
+                />
+                <h3>{formation.name}</h3>
+                <Link href={`/formation?id=${formation.id}`}>
+                  <button>Plus D&apos;infos &rarr;</button>
+                </Link>
+              </div>
+            </Link>
           ))}
           <div style={{ width: "32%" }}></div>
         </div>
@@ -104,14 +102,14 @@ const Index = (props: PolesFormations) => {
         </div>
         <div className={`${classes.formations}`}>
           {masterFormations.map((formation) => (
-            <Link key={formation.id} href="#">
+            <Link key={formation.id} href={`/formation?id=${formation.id}`}>
               <div className={classes.formation}>
                 <img
                   src={`/img/formations/formation_${formation.id}.png`}
                   alt={formation.name}
                 />
                 <h3>{formation.name}</h3>
-                <Link href="#">
+                <Link href={`/formation?id=${formation.id}`}>
                   <button>Plus D&apos;infos &rarr;</button>
                 </Link>
               </div>

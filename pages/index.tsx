@@ -45,6 +45,10 @@ const Index = () => {
     };
 
     window.addEventListener("scroll", func);
+
+    return () => {
+      window.removeEventListener("scroll", func);
+    };
   }, []);
 
   return (
