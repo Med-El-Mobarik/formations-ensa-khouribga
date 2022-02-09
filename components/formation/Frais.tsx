@@ -13,7 +13,7 @@ const Frais = (props: { frais_formation: string; frais_entretien: string }) => {
       <p style={{ display: "flex", alignItems: "center" }}>
         {" "}
         <CheckIcon style={{ fontSize: "28px", color: "#3498db" }} /> Frais
-        D'Entretien: {frais_entretien}
+        D&apos;Entretien: {frais_entretien}
       </p>
     </div>
   );
