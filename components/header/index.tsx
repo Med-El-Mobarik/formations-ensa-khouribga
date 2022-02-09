@@ -37,9 +37,11 @@ const index = () => {
             <button className={`${classes.btn} ${classes.full}`}>
               S&apos;inscrire
             </button>
-            <button className={`${classes.btn} ${classes.empty}`}>
-              Plus D&apos;infos
-            </button>
+            <Link href="/formations">
+              <button className={`${classes.btn} ${classes.empty}`}>
+                Plus D&apos;infos
+              </button>
+            </Link>
           </div>
         </div>
       </header>
