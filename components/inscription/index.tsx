@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import ListSubheader from "@mui/material/ListSubheader";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "../../axios/axios";
 import "animate.css";
 
@@ -199,6 +200,11 @@ const Insc = () => {
               defaultValue=""
             >
               <ListSubheader>Licence</ListSubheader>
+              {formations.length == 0 && (
+                <MenuItem value="">
+                  <CircularProgress />
+                </MenuItem>
+              )}
               {formations
                 .filter((formation) => formation.type === "licence")
                 .map((formation, id) => (
@@ -207,6 +213,11 @@ const Insc = () => {
                   </MenuItem>
                 ))}
               <ListSubheader>Master</ListSubheader>
+              {formations.length == 0 && (
+                <MenuItem value="">
+                  <CircularProgress />
+                </MenuItem>
+              )}
               {formations
                 .filter((formation) => formation.type === "master")
                 .map((formation, id) => (
