@@ -21,7 +21,9 @@ const index = () => {
               <Link href="/admission">
                 <li>Admission</li>
               </Link>
-              <li>Inscription</li>
+              <Link href="/inscription">
+                <li>Inscription</li>
+              </Link>
               <li>Contact</li>
             </ul>
           </nav>
@@ -34,9 +36,11 @@ const index = () => {
             100% Ingénierie, Présentiel / E-learning
           </h1>
           <div>
-            <button className={`${classes.btn} ${classes.full}`}>
-              S&apos;inscrire
-            </button>
+            <Link href="/inscription">
+              <button className={`${classes.btn} ${classes.full}`}>
+                S&apos;inscrire
+              </button>
+            </Link>
             <Link href="/formations">
               <button className={`${classes.btn} ${classes.empty}`}>
                 Plus D&apos;infos

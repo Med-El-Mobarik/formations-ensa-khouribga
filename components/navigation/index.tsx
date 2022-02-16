@@ -1,7 +1,7 @@
 import classes from "./index.module.scss";
 import Link from "next/link";
 
-const navigationBar = () => {
+const NavigationBar = () => {
   return (
     <div className={classes.navcontainer}>
       <nav>
@@ -18,7 +18,9 @@ const navigationBar = () => {
           <Link href="/admission">
             <li>Admission</li>
           </Link>
-          <li>Inscription</li>
+          <Link href="/inscription">
+            <li>Inscription</li>
+          </Link>
           <li>Contact</li>
         </ul>
       </nav>
@@ -26,4 +28,4 @@ const navigationBar = () => {
   );
 };
 
-export default navigationBar;
+export default NavigationBar;

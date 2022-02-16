@@ -1,6 +1,7 @@
 import NavigationBar from "../navigation";
 import Footer from "../footer";
 import classes from "./index.module.scss";
+import SignButton from "../signButton";
 
 const steps = [
   {
@@ -49,7 +50,7 @@ const Admission = () => {
             </div>
           ))}
         </div>
-        <button className={classes.btn}>S&apos;inscrire Maintenant !</button>
+        <SignButton />
       </div>
       <Footer />
     </>

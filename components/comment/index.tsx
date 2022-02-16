@@ -1,5 +1,5 @@
 import classes from "./index.module.scss";
-// import Image from "next/image";
+import SignButton from "../signButton";
 
 const index = () => {
   return (
@@ -26,7 +26,7 @@ const index = () => {
           </div>
         </div>
       </div>
-      <button>S&apos;inscrire</button>
+      <SignButton />
     </section>
   );
 };

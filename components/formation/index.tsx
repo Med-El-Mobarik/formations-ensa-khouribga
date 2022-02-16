@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import SignButton from "../signButton";
 import FullFormation from "../../interfaces/fullFormation";
 import Module from "../../interfaces/module";
 import Navigation from "../navigation";
@@ -134,7 +135,7 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
           <div
             className={`${classes.objectif} animate__animated animate__fadeInRight animate__slow`}
           >
-            <h4>_Objectif_</h4>
+            <h4>Objectif</h4>
             <p>{formation.objectif}</p>
           </div>
         </div>
@@ -150,7 +151,7 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
             clipPath: "polygon(0 10%, 100% 0%, 100% 90%, 0% 100%)",
           }}
         >
-          <h4>_Contenu De La Formation_</h4>
+          <h4>Contenu De La Formation</h4>
           <div className={classes.contenu}>
             <video
               id="vid-vid"
@@ -176,7 +177,7 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
               <ul className={classes.mods}>
                 {mods.map((module, id) => (
                   <li key={id}>
-                    <span>M.{id + 1}</span>__{module.name}
+                    <span>M.{id + 1}</span> {module.name}
                   </li>
                 ))}
               </ul>
@@ -184,7 +185,7 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
           </div>
         </div>
         <img className={classes.wavey} src="img/wavy lines.png" alt="" />
-        <h4>_Details Sur La Formation_</h4>
+        <h4>Details Sur La Formation</h4>
         <div className={classes.details}>
           <div className={classes.buttons}>
             {details.map((button) => (
@@ -218,29 +219,39 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
             )}
           </div>
         </div>
-        <h4>_Informations Générales_</h4>
+        <h4>Informations Générales</h4>
         <div className={classes.infos}>
           <div className={classes.info}>
-            <BookmarkAddedIcon style={{ fontSize:"30px" }} />
-            <p>Domaine: <br/>{formation.domaine}</p>
-          </div>
-          <div className={classes.info}>
-              <CastForEducationIcon style={{ fontSize:"30px" }} />
+            <BookmarkAddedIcon style={{ fontSize: "30px" }} />
             <p>
-            Type De Formation: <br/>{formation.type_formation}
+              Domaine: <br />
+              {formation.domaine}
             </p>
           </div>
           <div className={classes.info}>
-            <SchoolIcon style={{ fontSize:"30px" }} />
-            <p>Niveau: <br/>{formation.type.charAt(0).toUpperCase() + formation.type.slice(1)}</p>
+            <CastForEducationIcon style={{ fontSize: "30px" }} />
+            <p>
+              Type De Formation: <br />
+              {formation.type_formation}
+            </p>
           </div>
           <div className={classes.info}>
-            <EventAvailableIcon style={{ fontSize:"30px" }} />
-            <p>Durée: <br/>{formation.duree}</p>
+            <SchoolIcon style={{ fontSize: "30px" }} />
+            <p>
+              Niveau: <br />
+              {formation.type.charAt(0).toUpperCase() + formation.type.slice(1)}
+            </p>
+          </div>
+          <div className={classes.info}>
+            <EventAvailableIcon style={{ fontSize: "30px" }} />
+            <p>
+              Durée: <br />
+              {formation.duree}
+            </p>
           </div>
         </div>
         <img className={classes.wavey} src="img/wavy lines.png" alt="" />
-        <button className={classes.sign}>S&apos;inscrire Maintenant !</button>
+        <SignButton />
       </div>
       <Footer />
     </>
