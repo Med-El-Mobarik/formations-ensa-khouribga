@@ -1,10 +1,11 @@
 export default interface Inscription {
+  id?:number;
   nom: string;
   prenom: string;
   email: string;
   phone: string;
   cin: string;
-  date: Date;
+  date_naissance: Date;
   site: string;
   formation: string;
   diplome: string;

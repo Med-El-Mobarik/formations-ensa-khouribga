@@ -6,10 +6,12 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import ListSubheader from "@mui/material/ListSubheader";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "../../axios/axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "animate.css";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -35,13 +37,17 @@ const niveaux = [
 ];
 
 const Insc = () => {
+  // toast.success("Votre inscription a été bien enregitré");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Inscription>();
 
   const [formations, setFormations] = useState<Formations[]>([]);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     const getFormations = async () => {
@@ -57,13 +63,40 @@ const Insc = () => {
     getFormations();
   }, []);
 
-  const onSubmit: SubmitHandler<Inscription> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Inscription> = async (data) => {
+    try {
+      setSpinner(true);
+      const res = await axios.post("inscription", data);
+      console.log(res.data);
+      // alert("Inscription a été enregistré");
+      toast.success("Votre inscription a été bien enregitré", {
+        position: "top-center",
+        hideProgressBar: true,
+        closeOnClick: false,
+        draggable: false,
+        autoClose: 10000,
+      });
+      setSpinner(false);
+    } catch (error: any) {
+      console.log(error.message);
+      toast.error("Something went wrong please try again", {
+        position: "top-center",
+        hideProgressBar: true,
+        closeOnClick: false,
+        draggable: false,
+        autoClose: 10000,
+      });
+      setTimeout(() => {
+        location.reload();
+      }, 5000);
+    }
+    setSpinner(false);
   };
 
   return (
     <>
       <div className={classes.container}>
+        <ToastContainer />
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="animate__animated animate__fadeInUp animate__slow"
@@ -159,9 +192,9 @@ const Insc = () => {
               label="Date De Naissance"
               variant="standard"
               defaultValue="2000-01-01"
-              {...register("date", { required: true })}
+              {...register("date_naissance", { required: true })}
             />
-            {errors.date && (
+            {errors.date_naissance && (
               <span style={{ color: "tomato", fontSize: 12 }}>
                 Ajouter date de naissance
               </span>
@@ -305,7 +338,13 @@ const Insc = () => {
             {...register("adresse")}
             defaultValue=""
           />
-          <button>S&apos;inscrire</button>
+          <div className={classes.submitarea}>
+            {spinner ? (
+              <CircularProgress style={{ color: "#c31432" }} />
+            ) : (
+              <button>S&apos;inscrire</button>
+            )}
+          </div>
         </form>
       </div>
     </>
