@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   if (!poles || !formations) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/servererror",
         permanent: false,
       },
     };

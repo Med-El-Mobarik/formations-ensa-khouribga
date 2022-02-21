@@ -1,0 +1,35 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: -webkit-linear-gradient(to top, #c31432, #240b36);
+  background: linear-gradient(to top, #c31432, #240b36);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+
+    & > * {
+      margin-bottom: 10px;
+    }
+
+    .text {
+      div::before {
+        border-bottom:1px solid #bfbfbf;
+      }
+      div::after {
+        border-bottom:1px solid #bfbfbf;
+      }
+      label {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      input {
+        color: #bfbfbf;
+      }
+    }
+  }
+}

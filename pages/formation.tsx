@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import FullFormatio from "../interfaces/fullFormation";
 import Module from "../interfaces/module";
 import axios from "../axios/axios";

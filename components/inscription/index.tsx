@@ -37,13 +37,10 @@ const niveaux = [
 ];
 
 const Insc = () => {
-  // toast.success("Votre inscription a été bien enregitré");
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<Inscription>();
 
   const [formations, setFormations] = useState<Formations[]>([]);
