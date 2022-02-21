@@ -76,14 +76,14 @@ const Admin = () => {
           {...register("password", { required: true })}
         />
         {spinner ? (
-          <CircularProgress color="secondary" />
+          <CircularProgress />
         ) : (
           <Button
             style={{ marginTop: "15px" }}
             type="submit"
             variant="contained"
             fullWidth
-            color="secondary"
+            // color="secondary"
           >
             Login
           </Button>
