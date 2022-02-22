@@ -73,7 +73,7 @@ const Index = (props: PolesFormations) => {
             <Link key={formation.id} href={`/formation?id=${formation.id}`}>
               <div className={classes.formation}>
                 <img
-                  src={`/img/formations/formation_${formation.id}.png`}
+                  src={`/img/formations/${formation.image_name}`}
                   alt={formation.name}
                 />
                 <h3>{formation.name}</h3>
@@ -105,7 +105,7 @@ const Index = (props: PolesFormations) => {
             <Link key={formation.id} href={`/formation?id=${formation.id}`}>
               <div className={classes.formation}>
                 <img
-                  src={`/img/formations/formation_${formation.id}.png`}
+                  src={`/img/formations/${formation.image_name}`}
                   alt={formation.name}
                 />
                 <h3>{formation.name}</h3>

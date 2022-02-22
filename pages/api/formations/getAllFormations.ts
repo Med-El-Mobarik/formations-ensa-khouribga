@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const sql = "SELECT id, type, name, pole FROM Formations;";
+    const sql = "SELECT id, type, name, pole, image_name FROM Formations;";
 
     const [result, _] = await db.execute(sql);
     return res.status(200).json(result);

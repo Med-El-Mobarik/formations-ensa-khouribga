@@ -1,17 +1,14 @@
+import AddFormation from "../../../../components/admin/formations/add";
+
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/client";
-import Forms from "../../components/admin/formations";
-import axios from "../../axios/axios";
-import Formation from "../../interfaces/formations";
-import Pole from "../../interfaces/pole";
 
-const Formations = (props: {
-  formations: Formation[];
-  poles: Pole[];
-  session: { user: { name: string } };
-}) => {
-  const { formations, session, poles } = props;
-  return <Forms formations={formations} session={session} poles={poles} />;
+import axios from "../../../../axios/axios";
+import Pole from "../../../../interfaces/pole";
+
+const Add = (props: { poles: Pole[] }) => {
+  const { poles } = props;
+  return <AddFormation poles={poles} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -34,19 +31,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return false;
       }
     };
-    const getFormations = async () => {
-      try {
-        const res = await axios.get("formations/getAllFormations");
-        return res.data;
-      } catch (error: any) {
-        console.log(error.message);
-        return false;
-      }
-    };
-    const formations = await getFormations();
     const poles = await getPoles();
 
-    if (!formations) {
+    if (!poles) {
       return {
         redirect: {
           destination: "/servererror",
@@ -56,13 +43,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     } else {
       return {
         props: {
-          formations: formations,
           poles: poles,
-          session,
         },
       };
     }
   }
 };
 
-export default Formations;
+export default Add;

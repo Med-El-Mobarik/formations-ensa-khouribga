@@ -130,7 +130,7 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
         <div className={classes.obj}>
           <img
             className="animate__animated animate__fadeInLeft animate__slow"
-            src={`img/formations/formation_${formation.id}.png`}
+            src={`img/formations/${formation.image_name}`}
           />
           <div
             className={`${classes.objectif} animate__animated animate__fadeInRight animate__slow`}
