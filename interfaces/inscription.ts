@@ -1,11 +1,11 @@
 export default interface Inscription {
-  id?:number;
+  id?: number;
   nom: string;
   prenom: string;
   email: string;
   phone: string;
   cin: string;
-  date_naissance: Date;
+  date_naissance: string;
   site: string;
   formation: string;
   diplome: string;
@@ -13,4 +13,5 @@ export default interface Inscription {
   etablissment?: string;
   mention?: string;
   adresse?: string;
+  deposition: string;
 }

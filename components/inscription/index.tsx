@@ -63,7 +63,12 @@ const Insc = () => {
   const onSubmit: SubmitHandler<Inscription> = async (data) => {
     try {
       setSpinner(true);
-      const res = await axios.post("inscription", data);
+      const mydate = new Date();
+      const now = `${mydate.getUTCFullYear()}-${
+        mydate.getUTCMonth() + 1
+      }-${mydate.getUTCDate()}`;
+      const newdata = { ...data, deposition: now };
+      const res = await axios.post("inscription", newdata);
       console.log(res.data);
       // alert("Inscription a été enregistré");
       toast.success("Votre inscription a été bien enregitré", {

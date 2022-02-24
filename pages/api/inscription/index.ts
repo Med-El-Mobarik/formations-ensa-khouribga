@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Inscription from "../../../interfaces/inscription";
 import db from "../../../config/db";
+import { getSession } from "next-auth/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,6 +25,7 @@ export default async function handler(
         etablissment: request.etablissment?.replace(/'/g, "''"),
         mention: request.mention?.replace(/'/g, "''"),
         adresse: request.adresse?.replace(/'/g, "''"),
+        deposition: request.deposition,
       };
 
       const sql = `INSERT INTO Inscriptions 
@@ -41,17 +43,20 @@ export default async function handler(
             '${data.specialite}',
             '${data.etablissment}',
             '${data.mention}',
-            '${data.adresse}'
+            '${data.adresse}',
+            '${data.deposition}'
         )`;
 
       const [result, _] = await db.execute(sql);
-        return res.status(201).json({ result });
+      return res.status(201).json({ result });
     } catch (error: any) {
       console.log(error.message);
       res.status(500).json({ error: error.message });
     }
   }
   if (req.method === "GET") {
+    const session = await getSession({ req });
+
     try {
       const sql = "SELECT * FROM Inscriptions;";
 
@@ -60,6 +65,24 @@ export default async function handler(
     } catch (error: any) {
       console.log(error.message);
       return res.status(500).json({ error: error.message });
+    }
+  }
+  if (req.method === "DELETE") {
+    const session = await getSession({ req });
+
+    if (session) {
+      try {
+        const { id } = req.query;
+
+        const sql1 = `DELETE FROM Inscriptions WHERE id=${id}`;
+        const [result1, __] = await db.execute(sql1);
+
+        return res.status(201).json({ success: "You are done!" });
+      } catch (error) {
+        res.status(500).json({ error: "Server Error" });
+      }
+    } else {
+      return res.status(401).json({ message: "Not authenticated" });
     }
   }
 }

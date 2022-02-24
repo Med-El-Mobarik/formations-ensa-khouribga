@@ -18,6 +18,7 @@ export default async function handler(
     const session = await getSession({ req });
 
     if (session) {
+      console.log(req.cookies);
       try {
         const globData: any = await new Promise(function (resolve, reject) {
           const form = new formidable.IncomingForm({
@@ -86,6 +87,28 @@ export default async function handler(
         return res.status(201).json({ result });
       } catch (error) {
         res.status(500);
+      }
+    } else {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+  }
+  if (req.method === "DELETE") {
+    const session = await getSession({ req });
+
+    if (session) {
+      try {
+        const { id } = req.query;
+
+        const sql1 = `DELETE FROM Modules WHERE formation=${id}`;
+        const [result1, __] = await db.execute(sql1);
+
+        const sql = `DELETE FROM Formations WHERE id=${id}`;
+        const [result, _] = await db.execute(sql);
+
+        res.status(200).json({ message: "success" });
+      } catch (error: any) {
+        res.status(500).json({ error: "Server Error" });
+        console.log(error.message);
       }
     } else {
       return res.status(401).json({ message: "Not authenticated" });

@@ -22,6 +22,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
+import axios from "../../../axios/axios";
+import { CircularProgress } from "@mui/material";
+import { toast, ToastContainer } from "react-toastify";
+
 interface Del {
   id: number;
   contenue: string;
@@ -40,6 +44,7 @@ const Formations = (props: {
 
   const [open, setOpen] = useState(false);
   const [delElem, setDelElem] = useState<Del>();
+  const [spinner, setSpinner] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -47,9 +52,30 @@ const Formations = (props: {
     setOpen(false);
   };
 
+  const deleteFormation = async (id: number | undefined) => {
+    try {
+      setSpinner(true);
+      // console.log(id);
+      await axios.delete(`formation?id=${id}`);
+      setSpinner(false);
+      handleClose();
+      location.reload();
+    } catch (error) {
+      setSpinner(false);
+      toast.error("We can't delete this now. try again later!");
+    }
+  };
+
   return (
     <>
       <AdminNav />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        rtl={false}
+      />
       <Dialog
         open={open}
         onClose={handleClose}
@@ -62,12 +88,17 @@ const Formations = (props: {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => console.log(delElem?.id)}
-            style={{ backgroundColor: "tomato", color: "#fff" }}
-          >
-            Supprimer
-          </Button>
+          {spinner ? (
+            <CircularProgress style={{ color: "tomato" }} />
+          ) : (
+            <Button
+              onClick={() => deleteFormation(delElem?.id)}
+              style={{ backgroundColor: "tomato", color: "#fff" }}
+            >
+              Supprimer
+            </Button>
+          )}
+
           <Button style={{ color: "#555" }} onClick={handleClose}>
             Cancel
           </Button>

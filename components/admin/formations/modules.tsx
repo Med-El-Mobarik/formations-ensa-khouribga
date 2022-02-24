@@ -48,7 +48,7 @@ const Modules = (props: { id: number; type: string }) => {
     );
   };
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const sem1: string[] = [];
@@ -57,23 +57,45 @@ const Modules = (props: { id: number; type: string }) => {
 
     for (let i = 1; i <= sems1; i++) {
       const elem = document.getElementById(`sem1-m${i}`) as HTMLInputElement;
-      sem1.push(elem.value);
+      sem1.push(elem.value.replace(/'/g, "''"));
     }
     for (let i = 1; i <= sems2; i++) {
       const elem = document.getElementById(`sem2-m${i}`) as HTMLInputElement;
-      sem2.push(elem.value);
+      sem2.push(elem.value.replace(/'/g, "''"));
     }
     for (let i = 1; i <= sems3; i++) {
       const elem = document.getElementById(`sem3-m${i}`) as HTMLInputElement;
-      sem3.push(elem.value);
+      sem3.push(elem.value.replace(/'/g, "''"));
     }
 
-    
+    try {
+      setSpinner(true);
+      const res = await axios.post("formation/addModules", {
+        sem1,
+        sem2,
+        sem3,
+        id: id,
+      });
+      setSpinner(false);
+      toast.success("La formation est ajoutée avec succées");
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
+    } catch (error) {
+      toast.error("Erreur de serveur est servenue");
+    }
   };
 
   return (
     <>
       <AdminNav />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        rtl={false}
+      />
       <div className={classes.container}>
         <form onSubmit={onSubmit}>
           <h2 style={{ color: "#3498db", margin: "0px" }}>Semestre 1</h2>
