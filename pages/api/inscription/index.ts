@@ -61,6 +61,7 @@ export default async function handler(
       const sql = "SELECT * FROM Inscriptions;";
 
       const [result, _] = await db.execute(sql);
+      // console.log(result);
       return res.status(200).json(result);
     } catch (error: any) {
       console.log(error.message);

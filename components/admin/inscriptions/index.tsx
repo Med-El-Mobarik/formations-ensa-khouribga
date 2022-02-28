@@ -29,12 +29,20 @@ const Inscriptions = (props: { inscs: Inscription[] }) => {
   const [inscriptions, setInscriptions] = useState(inscs);
   const [open, setOpen] = useState(false);
   const [delElem, setDelElem] = useState<number>();
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [moreItem, setMoreItem] = useState<Inscription>();
   const [spinner, setSpinner] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleMoreClickOpen = () => {
+    setMoreOpen(true);
+  };
+  const handleMoreClose = () => {
+    setMoreOpen(false);
   };
 
   const deleteInscription = async (id: number | undefined) => {
@@ -96,6 +104,37 @@ const Inscriptions = (props: { inscs: Inscription[] }) => {
           rtl={false}
         />
         <Dialog
+          open={moreOpen}
+          onClose={handleMoreClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "20px",
+            }}
+          >
+            <div style={{ marginBottom: "10px" }}>
+              <span style={{ color: "#e67e22" }}>Spécialité</span> :{" "}
+              {moreItem?.specialite}
+            </div>
+            <div style={{ marginBottom: "10px" }}>
+              <span style={{ color: "#e67e22" }}>Etablissment</span> :{" "}
+              {moreItem?.etablissment}
+            </div>
+            <div style={{ marginBottom: "10px" }}>
+              <span style={{ color: "#e67e22" }}>Mention</span> :{" "}
+              {moreItem?.mention}
+            </div>
+            <div>
+              <span style={{ color: "#e67e22" }}>Address</span> :{" "}
+              {moreItem?.adresse}
+            </div>
+          </div>
+        </Dialog>
+        <Dialog
           open={open}
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
@@ -144,10 +183,6 @@ const Inscriptions = (props: { inscs: Inscription[] }) => {
                 <TableCell style={{ color: "#fff" }}>
                   Date de naissance
                 </TableCell>
-                {/* <TableCell style={{ color: "#fff" }}>Specialité</TableCell>
-                <TableCell style={{ color: "#fff" }}>Etablissment</TableCell>
-                <TableCell style={{ color: "#fff" }}>Mention</TableCell>
-                <TableCell style={{ color: "#fff" }}>Adresse</TableCell> */}
                 <TableCell style={{ color: "#fff" }}>Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -170,10 +205,6 @@ const Inscriptions = (props: { inscs: Inscription[] }) => {
                   <TableCell>
                     {inscription.date_naissance.split("T")[0]}
                   </TableCell>
-                  {/* <TableCell>{inscription.specialite}</TableCell>
-                  <TableCell>{inscription.etablissment}</TableCell>
-                  <TableCell>{inscription.mention}</TableCell>
-                  <TableCell>{inscription.adresse}</TableCell> */}
                   <TableCell>
                     <DeleteIcon
                       onClick={() => {
@@ -184,6 +215,10 @@ const Inscriptions = (props: { inscs: Inscription[] }) => {
                     />
                     <MoreHorizIcon
                       style={{ color: "#555", cursor: "pointer" }}
+                      onClick={() => {
+                        setMoreItem(inscription);
+                        handleMoreClickOpen();
+                      }}
                     />
                   </TableCell>
                 </TableRow>

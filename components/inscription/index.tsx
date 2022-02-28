@@ -68,9 +68,9 @@ const Insc = () => {
         mydate.getUTCMonth() + 1
       }-${mydate.getUTCDate()}`;
       const newdata = { ...data, deposition: now };
+      console.log(newdata);
       const res = await axios.post("inscription", newdata);
-      console.log(res.data);
-      // alert("Inscription a été enregistré");
+
       toast.success("Votre inscription a été bien enregitré", {
         position: "top-center",
         hideProgressBar: true,
