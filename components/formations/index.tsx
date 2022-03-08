@@ -6,6 +6,7 @@ import { useState } from "react";
 import Link from "next/link";
 import "animate.css";
 import Footer from "../footer/index";
+import getImage from "../../files";
 
 const Index = (props: PolesFormations) => {
   const { poles, formations } = props;
@@ -73,7 +74,7 @@ const Index = (props: PolesFormations) => {
             <Link key={formation.id} href={`/formation?id=${formation.id}`}>
               <div className={classes.formation}>
                 <img
-                  src={`/img/formations/${formation.image_name}`}
+                  src={getImage(formation.image_name!)}
                   alt={formation.name}
                 />
                 <h3>{formation.name}</h3>
@@ -105,7 +106,7 @@ const Index = (props: PolesFormations) => {
             <Link key={formation.id} href={`/formation?id=${formation.id}`}>
               <div className={classes.formation}>
                 <img
-                  src={`/img/formations/${formation.image_name}`}
+                  src={getImage(formation.image_name!)}
                   alt={formation.name}
                 />
                 <h3>{formation.name}</h3>

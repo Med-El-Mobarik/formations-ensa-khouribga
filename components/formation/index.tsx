@@ -14,6 +14,7 @@ import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import SchoolIcon from "@mui/icons-material/School";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
+import getImage from "../../files";
 
 const licence = [
   {
@@ -130,7 +131,7 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
         <div className={classes.obj}>
           <img
             className="animate__animated animate__fadeInLeft animate__slow"
-            src={`img/formations/${formation.image_name}`}
+            src={getImage(formation.image_name!)}
           />
           <div
             className={`${classes.objectif} animate__animated animate__fadeInRight animate__slow`}

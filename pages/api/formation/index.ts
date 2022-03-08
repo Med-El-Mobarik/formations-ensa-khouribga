@@ -22,7 +22,8 @@ export default async function handler(
       try {
         const globData: any = await new Promise(function (resolve, reject) {
           const form = new formidable.IncomingForm({
-            uploadDir: "./public/img/formations",
+            // uploadDir: "./public/img/formations",
+            uploadDir: "./files",
             keepExtensions: true,
             filename: function (name, ext) {
               return `${new Date().getDate()}${new Date().getHours()}${name}${ext}`;
