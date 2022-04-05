@@ -1,6 +1,6 @@
 import Inscs from "../../../components/admin/inscriptions";
 import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import axios from "../../../axios/axios";
 
 import Inscription from "../../../interfaces/inscription";
