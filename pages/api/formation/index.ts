@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "../../../config/db";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import formidable from "formidable";
 import Formation from "../../../interfaces/fullFormation";
 

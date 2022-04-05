@@ -2,7 +2,8 @@ import classes from "./index.module.scss";
 import Link from "next/link";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-import { signOut } from "next-auth/client";
+// import { signOut } from "next-auth/client";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const NavigationBar = () => {

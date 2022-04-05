@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import Forms from "../../../components/admin/formations";
 import axios from "../../../axios/axios";
 import Formation from "../../../interfaces/formations";
@@ -8,10 +8,10 @@ import Pole from "../../../interfaces/pole";
 const Formations = (props: {
   formations: Formation[];
   poles: Pole[];
-  session: { user: { name: string } };
+  name: string;
 }) => {
-  const { formations, session, poles } = props;
-  return <Forms formations={formations} session={session} poles={poles} />;
+  const { formations, name, poles } = props;
+  return <Forms formations={formations} name={name} poles={poles} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         props: {
           formations: formations,
           poles: poles,
-          session,
+          name: session.user.name,
         },
       };
     }

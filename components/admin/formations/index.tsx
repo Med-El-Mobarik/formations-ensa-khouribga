@@ -34,13 +34,9 @@ interface Del {
 const Formations = (props: {
   formations: Formation[];
   poles: Pole[];
-  session: {
-    user: {
-      name: string;
-    };
-  };
+  name: string;
 }) => {
-  const { formations, session, poles } = props;
+  const { formations, name, poles } = props;
 
   const [open, setOpen] = useState(false);
   const [delElem, setDelElem] = useState<Del>();
@@ -55,7 +51,6 @@ const Formations = (props: {
   const deleteFormation = async (id: number | undefined) => {
     try {
       setSpinner(true);
-      // console.log(id);
       await axios.delete(`formation?id=${id}`);
       setSpinner(false);
       handleClose();
@@ -105,7 +100,7 @@ const Formations = (props: {
         </DialogActions>
       </Dialog>
       <div className={classes.container}>
-        <h1>Bienvenue {session.user.name}</h1>
+        <h1>Bienvenue {name}</h1>
         <TableContainer
           component={Paper}
           style={{

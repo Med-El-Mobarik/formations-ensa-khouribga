@@ -1,6 +1,6 @@
 import Polees from "../../../components/admin/poles";
 import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import axios from "../../../axios/axios";
 import Pole from "../../../interfaces/pole";
 

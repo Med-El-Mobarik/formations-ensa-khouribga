@@ -1,6 +1,6 @@
 import AddPole from "../../../components/admin/poles/add";
 import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import axios from "../../../axios/axios";
 import Formation from "../../../interfaces/formations";
 
@@ -32,8 +32,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       }
     };
     const formations = await getFormations();
-
-    // console.log(inscriptions);
 
     if (!formations) {
       return {

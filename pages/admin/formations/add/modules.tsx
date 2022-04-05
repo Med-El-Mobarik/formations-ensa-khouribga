@@ -1,7 +1,7 @@
 import Mods from "../../../../components/admin/formations/modules";
 
 import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 
 const Modules = (props: { id: string; type: string }) => {
   const { id, type } = props;

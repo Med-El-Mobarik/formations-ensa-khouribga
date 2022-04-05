@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Inscription from "../../../interfaces/inscription";
 import db from "../../../config/db";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 
 export default async function handler(
   req: NextApiRequest,

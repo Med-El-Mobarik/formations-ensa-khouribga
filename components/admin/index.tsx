@@ -13,7 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useRouter } from "next/router";
 
-import { signIn, SignInResponse } from "next-auth/client";
+// import { signIn, SignInResponse } from "next-auth/client";
+import { signIn, SignInResponse } from "next-auth/react";
 
 interface Data {
   username: string;
@@ -30,13 +31,13 @@ const Admin = () => {
   const onSubmit: SubmitHandler<Data> = async (data) => {
     try {
       setSpinner(true);
-      const result: SignInResponse | undefined = await signIn("credentials", {
+      const result: any = await signIn("credentials", {
         redirect: false,
         username: data.username,
         password: data.password,
       });
 
-      if (result?.error) {
+      if (result.error) {
         setSpinner(false);
         toast.error("invalid username or password");
       } else {
