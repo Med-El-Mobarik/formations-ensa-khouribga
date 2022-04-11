@@ -15,5 +15,7 @@ export default interface FullFormatio {
   entretien: string;
   debouches: string;
   image?: File[];
+  icons?: File[];
   image_name?: string;
+  icons_name?: string;
 }

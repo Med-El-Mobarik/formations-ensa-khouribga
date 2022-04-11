@@ -25,6 +25,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import axios from "../../../axios/axios";
 import { CircularProgress } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Del {
   id: number;

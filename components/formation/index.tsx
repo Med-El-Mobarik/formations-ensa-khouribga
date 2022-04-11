@@ -14,7 +14,8 @@ import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import SchoolIcon from "@mui/icons-material/School";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
-import getImage from "../../files";
+// @ts-ignore
+import { Image } from "cloudinary-react";
 
 const licence = [
   {
@@ -129,10 +130,15 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
         </h2>
         <h3>{formation.name}</h3>
         <div className={classes.obj}>
-          <img
+          <Image
+            className="animate__animated animate__fadeInLeft animate__slow"
+            cloudName="dvfaacurl"
+            publicId={formation.image_name}
+          />
+          {/* <img
             className="animate__animated animate__fadeInLeft animate__slow"
             src={getImage(formation.image_name!)}
-          />
+          /> */}
           <div
             className={`${classes.objectif} animate__animated animate__fadeInRight animate__slow`}
           >
@@ -252,6 +258,12 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
           </div>
         </div>
         <img className={classes.wavey} src="img/wavy lines.png" alt="" />
+        {/* <img className={classes.icons} src="img/test.jpg" /> */}
+        <Image
+          className={classes.icons}
+          cloudName="dvfaacurl"
+          publicId={formation.icons_name}
+        />
         <SignButton />
       </div>
       <Footer />

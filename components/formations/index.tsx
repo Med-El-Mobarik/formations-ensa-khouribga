@@ -7,6 +7,8 @@ import Link from "next/link";
 import "animate.css";
 import Footer from "../footer/index";
 import getImage from "../../files";
+// @ts-ignore
+import { Image } from "cloudinary-react";
 
 const Index = (props: PolesFormations) => {
   const { poles, formations } = props;
@@ -73,10 +75,16 @@ const Index = (props: PolesFormations) => {
           {licenceFormations.map((formation) => (
             <Link key={formation.id} href={`/formation?id=${formation.id}`}>
               <div className={classes.formation}>
-                <img
+                <div className={classes.imagecontainer}>
+                  <Image
+                    cloudName="dvfaacurl"
+                    publicId={formation.image_name}
+                  />
+                </div>
+                {/* <img
                   src={getImage(formation.image_name!)}
                   alt={formation.name}
-                />
+                /> */}
                 <h3>{formation.name}</h3>
                 <Link href={`/formation?id=${formation.id}`}>
                   <button>Plus D&apos;infos &rarr;</button>
@@ -105,10 +113,16 @@ const Index = (props: PolesFormations) => {
           {masterFormations.map((formation) => (
             <Link key={formation.id} href={`/formation?id=${formation.id}`}>
               <div className={classes.formation}>
-                <img
+                <div className={classes.imagecontainer}>
+                  <Image
+                    cloudName="dvfaacurl"
+                    publicId={formation.image_name}
+                  />
+                </div>
+                {/* <img
                   src={getImage(formation.image_name!)}
                   alt={formation.name}
-                />
+                /> */}
                 <h3>{formation.name}</h3>
                 <Link href={`/formation?id=${formation.id}`}>
                   <button>Plus D&apos;infos &rarr;</button>

@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 const Add = (props: { poles: Pole[] }) => {
+  const url = "https://api.cloudinary.com/v1_1/dvfaacurl/image/upload";
   const router = useRouter();
 
   const [spinner, setSpinner] = useState(false);
@@ -26,44 +27,52 @@ const Add = (props: { poles: Pole[] }) => {
   const { register, handleSubmit } = useForm<Formation>();
 
   const onSubmit: SubmitHandler<Formation> = async (data) => {
-    if (data.image) {
-      if (data.image[0].type !== "image/png") {
-        toast.error("Image doit etre en format png");
+    if (data.image && data.icons) {
+      const types = ["image/png", "image/jpeg", "image/jpg"];
+      if (
+        !types.includes(data.image[0].type) ||
+        !types.includes(data.icons[0].type)
+      ) {
+        toast.error("Images must be jpeg or png");
       } else {
         try {
           setSpinner(true);
 
-          const form = new FormData();
+          const image = new FormData();
+          image.append("file", data.image[0]);
+          image.append("upload_preset", "formations");
+          image.append("folder", "formations");
+          const icons = new FormData();
+          icons.append("file", data.icons[0]);
+          icons.append("upload_preset", "formations");
+          icons.append("folder", "icons");
 
-          form.append("type", data.type);
-          form.append("name", data.name);
-          form.append("pole", `${data.pole}`);
-          form.append("objectif", data.objectif);
-          form.append("frais_formation", data.frais_formation);
-          form.append("frais_entretien", data.frais_entretien);
-          form.append("admission", data.admission);
-          form.append("domaine", data.domaine);
-          form.append("type_formation", data.type_formation),
-            form.append("duree", data.duree);
-          form.append("organisation", data.organisation);
-          form.append("deposition", data.deposition);
-          form.append("entretien", data.entretien);
-          form.append("debouches", data.debouches);
-          form.append("file", data.image[0]);
+          const res = await axios.post(url, image);
+          // console.log(res.data);
+          const res1 = await axios.post(url, icons);
+          // console.log(res.data);
 
-          const res = await axios.post("formation", form);
-          //   toast.success("Formation est ajoutée");
-          //   console.log(res.data);
+          const body = {
+            ...data,
+            image_name: res.data.public_id,
+            icons_name: res1.data.public_id,
+            image: "",
+            icons: "",
+          };
+
+          console.log(body);
+
+          const res2 = await axios.post("formation", body);
 
           router.push(
-            `/admin/formations/add/modules?id=${res.data.result.insertId}&type=${data.type}`
+            `/admin/formations/add/modules?id=${res2.data.result.insertId}&type=${data.type}`
           );
 
           setSpinner(false);
         } catch (error: any) {
           setSpinner(false);
-          toast.error("Erreur se serve est servenue");
-          console.log(error.response);
+          toast.error("Erreur de serve est servenue");
+          console.log(error);
         }
       }
     }
@@ -206,13 +215,24 @@ const Add = (props: { poles: Pole[] }) => {
           />
           <div>
             <label style={{ color: "#555" }} htmlFor="form-img">
-              Choisir une image
+              Image de la formation
             </label>
             <input
               id="form-img"
               type="file"
-              accept="image/png"
+              accept="image/png,image/jpeg,image/jpg"
               {...register("image", { required: true })}
+            />
+          </div>
+          <div>
+            <label style={{ color: "#555" }} htmlFor="form-img">
+              Image contient les icons
+            </label>
+            <input
+              id="form-icons"
+              type="file"
+              accept="image/png,image/jpeg,image/jpg"
+              {...register("icons", { required: true })}
             />
           </div>
           <div

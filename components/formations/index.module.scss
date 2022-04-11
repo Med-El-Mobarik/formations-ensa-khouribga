@@ -78,6 +78,10 @@
       transition: 0.3s;
       cursor: pointer;
 
+      .imagecontainer {
+        height: 120px;
+      }
+
       &:hover {
         transform: scale(1.05);
         backface-visibility: hidden;

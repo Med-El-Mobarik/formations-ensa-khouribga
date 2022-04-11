@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Nav from "../../adminnav";
 import Inscription from "../../../interfaces/inscription";
+import Formations from "../../../interfaces/formations";
 import classes from "./index.module.scss";
 import axios from "../../../axios/axios";
 
@@ -15,6 +16,10 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -23,9 +28,10 @@ import DialogContentText from "@mui/material/DialogContentText";
 import { CircularProgress } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 
-const Inscriptions = (props: { inscs: Inscription[] }) => {
-  const { inscs } = props;
+const Inscriptions = (props: { inscs: Inscription[]; forms: Formations[] }) => {
+  const { inscs, forms } = props;
 
+  const [formation, setformation] = useState("");
   const [inscriptions, setInscriptions] = useState(inscs);
   const [open, setOpen] = useState(false);
   const [delElem, setDelElem] = useState<number>();
@@ -43,6 +49,9 @@ const Inscriptions = (props: { inscs: Inscription[] }) => {
   };
   const handleMoreClose = () => {
     setMoreOpen(false);
+  };
+  const handleChange = (event: SelectChangeEvent) => {
+    setformation(event.target.value as string);
   };
 
   const deleteInscription = async (id: number | undefined) => {
@@ -95,6 +104,24 @@ const Inscriptions = (props: { inscs: Inscription[] }) => {
           <button onClick={sortByOld} className={classes.sort}>
             Oldest
           </button>
+          <FormControl style={{ width: "200px" }}>
+            <InputLabel id="demo-simple-select-label">Formation</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              // id="demo-simple-select"
+              value={formation}
+              label="Formation"
+              onChange={handleChange}
+              // style={{ color: "#fff", backgroundColor: "#3498db", border: 0 }}
+            >
+              <MenuItem value="">All</MenuItem>
+              {forms.map((forma) => (
+                <MenuItem key={forma.id} value={forma.name}>
+                  {forma.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
         <ToastContainer
           position="top-center"
@@ -187,42 +214,52 @@ const Inscriptions = (props: { inscs: Inscription[] }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {inscriptions.map((inscription) => (
-                <TableRow
-                  key={inscription.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {`${inscription.nom} ${inscription.prenom}`}
-                  </TableCell>
-                  <TableCell>{inscription.deposition?.split("T")[0]}</TableCell>
-                  <TableCell>{inscription.formation}</TableCell>
-                  <TableCell>{inscription.diplome}</TableCell>
-                  <TableCell>{inscription.email}</TableCell>
-                  <TableCell>{inscription.phone}</TableCell>
-                  <TableCell>{inscription.cin}</TableCell>
-                  <TableCell>{inscription.site}</TableCell>
-                  <TableCell>
-                    {inscription.date_naissance.split("T")[0]}
-                  </TableCell>
-                  <TableCell>
-                    <DeleteIcon
-                      onClick={() => {
-                        setDelElem(inscription.id);
-                        handleClickOpen();
-                      }}
-                      style={{ color: "tomato", cursor: "pointer" }}
-                    />
-                    <MoreHorizIcon
-                      style={{ color: "#555", cursor: "pointer" }}
-                      onClick={() => {
-                        setMoreItem(inscription);
-                        handleMoreClickOpen();
-                      }}
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
+              {inscriptions
+                .filter((inscription) => {
+                  if (formation !== "") {
+                    return inscription.formation == formation;
+                  } else {
+                    return true;
+                  }
+                })
+                .map((inscription) => (
+                  <TableRow
+                    key={inscription.id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {`${inscription.nom} ${inscription.prenom}`}
+                    </TableCell>
+                    <TableCell>
+                      {inscription.deposition?.split("T")[0]}
+                    </TableCell>
+                    <TableCell>{inscription.formation}</TableCell>
+                    <TableCell>{inscription.diplome}</TableCell>
+                    <TableCell>{inscription.email}</TableCell>
+                    <TableCell>{inscription.phone}</TableCell>
+                    <TableCell>{inscription.cin}</TableCell>
+                    <TableCell>{inscription.site}</TableCell>
+                    <TableCell>
+                      {inscription.date_naissance.split("T")[0]}
+                    </TableCell>
+                    <TableCell>
+                      <DeleteIcon
+                        onClick={() => {
+                          setDelElem(inscription.id);
+                          handleClickOpen();
+                        }}
+                        style={{ color: "tomato", cursor: "pointer" }}
+                      />
+                      <MoreHorizIcon
+                        style={{ color: "#555", cursor: "pointer" }}
+                        onClick={() => {
+                          setMoreItem(inscription);
+                          handleMoreClickOpen();
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

@@ -3,6 +3,7 @@ const getImage = (filename: string) => {
     const image = require(`./${filename}`);
     return image.default.src;
   } catch (error) {
+    console.log(filename);
     return "";
   }
 };

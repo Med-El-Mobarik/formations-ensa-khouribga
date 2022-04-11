@@ -4,10 +4,11 @@ import { getSession } from "next-auth/react";
 import axios from "../../../axios/axios";
 
 import Inscription from "../../../interfaces/inscription";
+import Formations from '../../../interfaces/formations';
 
-const Inscriptions = (props: { inscriptions: Inscription[] }) => {
-  const { inscriptions } = props;
-  return <Inscs inscs={inscriptions} />;
+const Inscriptions = (props: { inscriptions: Inscription[], formations: Formations[] }) => {
+  const { inscriptions, formations } = props;
+  return <Inscs inscs={inscriptions} forms={formations}/>;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -30,9 +31,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return false;
       }
     };
+    const getFormations = async () => {
+      try {
+        const res = await axios.get("formations/getAllFormations");
+        return res.data;
+      } catch (error: any) {
+        console.log(error.message);
+        return false;
+      }
+    };
     const inscriptions = await getInscriptions();
+    const formations = await getFormations();
 
-    if (!inscriptions) {
+    if (!inscriptions || !formations) {
       return {
         redirect: {
           destination: "/servererror",
@@ -43,6 +54,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return {
         props: {
           inscriptions: inscriptions,
+          formations: formations
         },
       };
     }

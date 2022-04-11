@@ -1,14 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "../../../config/db";
 import { getSession } from "next-auth/react";
-import formidable from "formidable";
+// import formidable from "formidable";
 import Formation from "../../../interfaces/fullFormation";
+// import fs from "fs";
+// import path from "path";
+// import axios from "../../../axios/axios";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: true,
+//   },
+// };
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,31 +21,9 @@ export default async function handler(
     const session = await getSession({ req });
 
     if (session) {
-      console.log(req.cookies);
       try {
-        const globData: any = await new Promise(function (resolve, reject) {
-          const form = new formidable.IncomingForm({
-            // uploadDir: "./public/img/formations",
-            uploadDir: "./files",
-            keepExtensions: true,
-            filename: function (name, ext) {
-              return `${new Date().getDate()}${new Date().getHours()}${name}${ext}`;
-            },
-          });
-          form.parse(req, function (err, fields, files) {
-            if (err) return reject(err);
-            resolve({ fields, files });
-          });
-        });
-
-        const temp = `${new Date().getDate()}${new Date().getHours()}${
-          globData.files.file.originalFilename
-        }`;
-        const img_nom = temp.replace(/'/g, "''");
-
         const body: Formation = {
-          ...globData.fields,
-          pole: parseInt(globData.fields.pole),
+          ...req.body,
         };
 
         const data: Formation = {
@@ -60,7 +41,8 @@ export default async function handler(
           deposition: body.deposition.replace(/'/g, "''"),
           entretien: body.entretien.replace(/'/g, "''"),
           debouches: body.debouches.replace(/'/g, "''"),
-          image_name: img_nom,
+          image_name: body.image_name?.replace(/'/g, "''"),
+          icons_name: body.icons_name?.replace(/'/g, "''"),
         };
 
         const sql = `INSERT INTO Formations VALUES(
@@ -79,15 +61,19 @@ export default async function handler(
                     '${data.deposition}',
                     '${data.entretien}',
                     '${data.debouches}',
-                    '${data.image_name}'
-
+                    '${data.image_name}',
+                    '${data.icons_name}'
                 )`;
 
-        const [result, _] = await db.execute(sql);
-
-        return res.status(201).json({ result });
+        try {
+          const [result, _] = await db.execute(sql);
+          return res.status(201).json({ result });
+        } catch (error) {
+          console.log(error);
+          return res.status(500);
+        }
       } catch (error) {
-        res.status(500);
+        return res.status(500);
       }
     } else {
       return res.status(401).json({ message: "Not authenticated" });
@@ -108,8 +94,8 @@ export default async function handler(
 
         res.status(200).json({ message: "success" });
       } catch (error: any) {
-        res.status(500).json({ error: "Server Error" });
         console.log(error.message);
+        return res.status(500).json({ error: "Server Error" });
       }
     } else {
       return res.status(401).json({ message: "Not authenticated" });
