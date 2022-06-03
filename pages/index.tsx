@@ -4,8 +4,7 @@ import Footer from "../components/footer";
 import Formations from "../components/objs";
 import Comment from "../components/comment";
 import { useEffect } from "react";
-import React from "react";
-
+import Head from "next/head";
 const Index = () => {
   useEffect(() => {
     const func = () => {
@@ -53,6 +52,13 @@ const Index = () => {
 
   return (
     <>
+      <Head>
+        <title>Ensa Khouribga Formations continues</title>
+        <meta
+          name="description"
+          content="ensak-formations.com: ENSA Khouribga - Formation Continue professionnelle vous propose des formations diplômants, en : Système d’information - Génie logiciel - Administration réseaux - Analyse et conception des systèmes informatiques"
+        ></meta>
+      </Head>
       <Header />
       <Why />
       <Formations />

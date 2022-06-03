@@ -2,9 +2,21 @@ import Forms from "../components/formations";
 import PolesFormations from "../interfaces/pole&formation";
 import axios from "../axios/axios";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 const Formations = (props: PolesFormations) => {
-  return <Forms poles={props.poles} formations={props.formations} />;
+  return (
+    <>
+      <Head>
+        <title>Ensa Khouribga Formations continues</title>
+        <meta
+          name="description"
+          content="ensak-formations.com: ENSA Khouribga - Formation Continue professionnelle vous propose des formations diplômants, en : Système d’information - Génie logiciel - Administration réseaux - Analyse et conception des systèmes informatiques"
+        ></meta>
+      </Head>
+      <Forms poles={props.poles} formations={props.formations} />
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {

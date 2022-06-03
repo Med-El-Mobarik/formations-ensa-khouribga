@@ -134,11 +134,8 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
             className="animate__animated animate__fadeInLeft animate__slow"
             cloudName="dvfaacurl"
             publicId={formation.image_name}
+            alt="formation_image"
           />
-          {/* <img
-            className="animate__animated animate__fadeInLeft animate__slow"
-            src={getImage(formation.image_name!)}
-          /> */}
           <div
             className={`${classes.objectif} animate__animated animate__fadeInRight animate__slow`}
           >
@@ -146,7 +143,6 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
             <p>{formation.objectif}</p>
           </div>
         </div>
-        {/* <img className={classes.wavey} src="img/wavy lines.png" alt="" /> */}
         <div
           style={{
             width: "100%",
@@ -191,7 +187,7 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
             </div>
           </div>
         </div>
-        <img className={classes.wavey} src="img/wavy lines.png" alt="" />
+        <img className={classes.wavey} src="img/wavy lines.png" alt="w" />
         <h4>Details Sur La Formation</h4>
         <div className={classes.details}>
           <div className={classes.buttons}>
@@ -257,12 +253,13 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
             </p>
           </div>
         </div>
-        <img className={classes.wavey} src="img/wavy lines.png" alt="" />
+        <img className={classes.wavey} src="img/wavy lines.png" alt="w" />
         {/* <img className={classes.icons} src="img/test.jpg" /> */}
         <Image
           className={classes.icons}
           cloudName="dvfaacurl"
           publicId={formation.icons_name}
+          alt="formation_specs"
         />
         <SignButton />
       </div>

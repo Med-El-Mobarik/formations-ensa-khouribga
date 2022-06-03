@@ -9,8 +9,20 @@
     margin-bottom: 50px;
   }
 
+  .video {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    video {
+      width: 65%;
+      border-radius: 2px;
+    }
+  }
+
   .content {
-    width: 70%;
+    width: 40%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -20,6 +32,7 @@
     .card {
       position: relative;
       transform-style: preserve-3d;
+      width: 25%;
 
       &:hover {
         & > .front {
@@ -39,15 +52,17 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 270px;
-        width: 270px;
-        background-color: rgba(169, 169, 169, 0.3);
+        height: 200px;
+        width: 200px;
+        // background-color: rgba(169, 169, 169, 0.3);
+        background-color: $primary-color;
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
         transform: perspective(1200px) rotateY(0deg);
         p {
-          color: #808080;
-          font-size: 22px;
+          // color: #808080;
+          color: #fff;
+          font-size: 20px;
         }
       }
 
@@ -61,16 +76,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 270px;
-        width: 270px;
-        background-color: $primary-color;
+        height: 200px;
+        width: 200px;
+        background-color: $secondary-color;
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
         transform: perspective(1200px) rotateY(180deg);
+        padding: 5px;
 
         p {
           color: #fff;
-          font-size: 20px;
+          font-size: 16px;
           text-align: center;
         }
       }

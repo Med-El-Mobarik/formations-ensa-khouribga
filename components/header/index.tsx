@@ -32,7 +32,9 @@ const index = () => {
           className={`${classes.content} animate__animated animate__fadeInUp`}
         >
           <h1>
-            Licence Et Master :<br />
+            Formations Continues <br />
+            Ensa Khouribga (Licence Et Master)
+            <br />
             100% Ingénierie, Présentiel / E-learning
           </h1>
           <div>

@@ -3,10 +3,22 @@ import Module from "../interfaces/module";
 import axios from "../axios/axios";
 import { GetServerSideProps } from "next";
 import Forma from "../components/formation";
+import Head from "next/head";
 
 const Formation = (props: { formation: FullFormatio; modules: Module[] }) => {
   const { formation, modules } = props;
-  return <Forma formation={formation} modules={modules} />;
+  return (
+    <>
+      <Head>
+        <title>{formation.name}</title>
+        <meta
+          name="description"
+          content={`Formation Continue professionnelle ${formation.name}`}
+        ></meta>
+      </Head>
+      <Forma formation={formation} modules={modules} />
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

@@ -2,7 +2,7 @@ import classes from "./index.module.scss";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import PersonIcon from "@mui/icons-material/Person";
 import HelpIcon from "@mui/icons-material/Help";
-import {useEffect} from 'react'
+import { useEffect } from "react";
 
 const index = () => {
   return (
@@ -11,7 +11,7 @@ const index = () => {
       <div id="cards" className={classes.content}>
         <div className={classes.card}>
           <div className={classes.front}>
-            <PersonIcon style={{ color: "#e67e22", fontSize: "60px" }} />
+            <PersonIcon style={{ color: "#fff", fontSize: "60px" }} />
             <p>Amazing Teachers</p>
           </div>
           <div className={classes.back}>
@@ -22,7 +22,7 @@ const index = () => {
         </div>
         <div className={classes.card}>
           <div className={classes.front}>
-            <HelpIcon style={{ color: "#e67e22", fontSize: "60px" }} />
+            <HelpIcon style={{ color: "#fff", fontSize: "60px" }} />
             <p>Great Support</p>
           </div>
           <div className={classes.back}>
@@ -34,9 +34,7 @@ const index = () => {
         </div>
         <div className={classes.card}>
           <div className={classes.front}>
-            <CastForEducationIcon
-              style={{ color: "#e67e22", fontSize: "60px" }}
-            />
+            <CastForEducationIcon style={{ color: "#fff", fontSize: "60px" }} />
             <p>Online Courses</p>
           </div>
           <div className={classes.back}>
@@ -46,6 +44,9 @@ const index = () => {
             </p>
           </div>
         </div>
+      </div>
+      <div className={classes.video}>
+        <video src="videos/FC ENSAK.mp4" controls autoPlay muted></video>
       </div>
     </section>
   );

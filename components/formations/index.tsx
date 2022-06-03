@@ -68,10 +68,7 @@ const Index = (props: PolesFormations) => {
             </button>
           ))}
         </div>
-        <div
-          // className={`${classes.formations} animate__animated animate__fadeIn`}
-          className={classes.formations}
-        >
+        <div className={classes.formations}>
           {licenceFormations.map((formation) => (
             <Link key={formation.id} href={`/formation?id=${formation.id}`}>
               <div className={classes.formation}>
@@ -79,12 +76,9 @@ const Index = (props: PolesFormations) => {
                   <Image
                     cloudName="dvfaacurl"
                     publicId={formation.image_name}
+                    alt="formation_image"
                   />
                 </div>
-                {/* <img
-                  src={getImage(formation.image_name!)}
-                  alt={formation.name}
-                /> */}
                 <h3>{formation.name}</h3>
                 <Link href={`/formation?id=${formation.id}`}>
                   <button>Plus D&apos;infos &rarr;</button>
@@ -117,12 +111,9 @@ const Index = (props: PolesFormations) => {
                   <Image
                     cloudName="dvfaacurl"
                     publicId={formation.image_name}
+                    alt="formation_image"
                   />
                 </div>
-                {/* <img
-                  src={getImage(formation.image_name!)}
-                  alt={formation.name}
-                /> */}
                 <h3>{formation.name}</h3>
                 <Link href={`/formation?id=${formation.id}`}>
                   <button>Plus D&apos;infos &rarr;</button>
