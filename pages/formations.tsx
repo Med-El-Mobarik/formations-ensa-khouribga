@@ -35,6 +35,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       return res.data;
     } catch (error: any) {
       console.log(error.message);
+      if (error.reponse) console.log(error.reponse);
       return false;
     }
   };

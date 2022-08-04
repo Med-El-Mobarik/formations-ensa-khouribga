@@ -1,17 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "../../../config/db";
 import { getSession } from "next-auth/react";
-// import formidable from "formidable";
 import Formation from "../../../interfaces/fullFormation";
-// import fs from "fs";
-// import path from "path";
-// import axios from "../../../axios/axios";
-
-// export const config = {
-//   api: {
-//     bodyParser: true,
-//   },
-// };
 
 export default async function handler(
   req: NextApiRequest,
@@ -96,6 +86,61 @@ export default async function handler(
       } catch (error: any) {
         console.log(error.message);
         return res.status(500).json({ error: "Server Error" });
+      }
+    } else {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+  }
+  if (req.method === "PUT") {
+    const session = await getSession({ req });
+
+    if (session) {
+      try {
+        const body: Formation = {
+          ...req.body,
+        };
+
+        const data: Formation = {
+          type: body.type,
+          name: body.name.replace(/'/g, "''"),
+          pole: body.pole,
+          frais_formation: body.frais_formation.replace(/'/g, "''"),
+          objectif: body.objectif.replace(/'/g, "''"),
+          frais_entretien: body.frais_entretien.replace(/'/g, "''"),
+          admission: body.admission.replace(/'/g, "''"),
+          domaine: body.domaine.replace(/'/g, "''"),
+          type_formation: body.type_formation.replace(/'/g, "''"),
+          duree: body.duree.replace(/'/g, "''"),
+          organisation: body.organisation.replace(/'/g, "''"),
+          deposition: body.deposition.replace(/'/g, "''"),
+          entretien: body.entretien.replace(/'/g, "''"),
+          debouches: body.debouches.replace(/'/g, "''"),
+        };
+
+        const sql = `UPDATE Formations
+        SET
+        type='${data.type}',
+        name='${data.name}',
+        pole=${data.pole},
+        frais_formation='${data.frais_formation}',
+        objectif='${data.objectif}',
+        frais_entretien='${data.frais_entretien}',
+        admission='${data.admission}',
+        domaine='${data.domaine}',
+        type_formation='${data.type_formation}',
+        duree='${data.duree}',
+        organisation='${data.organisation}',
+        deposition='${data.deposition}',
+        entretien='${data.entretien}',
+        debouches='${data.debouches}'
+        WHERE
+        id=${body.id};`;
+
+        await db.execute(sql);
+        return res.status(201).json({ msg: "success" });
+      } catch (error) {
+        console.log(error);
+        return res.status(500);
       }
     } else {
       return res.status(401).json({ message: "Not authenticated" });

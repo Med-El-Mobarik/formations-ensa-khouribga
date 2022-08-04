@@ -158,7 +158,7 @@ const Index = (props: { formation: FullFormation; modules: Module[] }) => {
           <div className={classes.contenu}>
             <video
               id="vid-vid"
-              src="videos/Master SI.mp4"
+              src="videos/FC ENSAK.mp4"
               autoPlay={true}
               poster="img/ensakh_black.png"
               controls

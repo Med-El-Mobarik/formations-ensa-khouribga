@@ -132,7 +132,16 @@ const Formations = (props: {
                     {poles.find((pole) => pole.id === formation.pole)?.name}
                   </TableCell>
                   <TableCell>
-                    <EditIcon style={{ color: "#3498db", cursor: "pointer" }} />{" "}
+                    <Link
+                      href={{
+                        pathname: "/admin/formations/edit",
+                        query: { id: formation.id },
+                      }}
+                    >
+                      <EditIcon
+                        style={{ color: "#3498db", cursor: "pointer" }}
+                      />
+                    </Link>{" "}
                     <DeleteIcon
                       onClick={() => {
                         setDelElem({
